@@ -1,0 +1,44 @@
+def grades(x):
+    d = {'A':10,'AB':9,'B':8,'BC':7,'C':6,'CD':5,'D':4}
+    x=d[x]
+    return x
+Grade={}
+course={}
+students={}
+i=input()
+c1=input()
+c2=input()
+while(c2!="Students"):
+    c2=input()
+usn,name=input().split("~")
+students[usn]=name
+Grade[usn]=0
+course[usn]=0
+i1=input()
+while(i1!="Grades"):
+    usn,name=i1.split("~")
+    students[usn]=name
+    Grade[usn]=0
+    course[usn]=0
+    i1=input()
+ccode,sem,year,num,grade=input().split("~")
+if num in Grade.keys():
+    b=grades(grade)
+    Grade[num]=Grade[num]+b
+    course[num]=course[num]+1
+i2=input()
+while(i2!="EndOfInput"):
+    ccode,sem,year,num,grade=i2.split("~")
+    if num in Grade.keys():
+        b=grades(grade)
+        Grade[num]=Grade[num]+b
+        course[num]=course[num]+1
+    i2=input()
+sortusn=sorted(students)
+for k in sortusn:
+    if Grade[k]!=0:
+        f=(Grade[k]+course[k])/2
+        fg=round(f,2)
+        print("{}{}{}{}{}\n".format(k,"~",students[k],"~",fg))
+    else:
+        print("{}{}{}{}{}\n".format(k,"~",students[k],"~",0))
